@@ -24,14 +24,14 @@ const set_query = () => {
 }
 const grnv = () => {
   const key = document.getElementById("key").value;
-  let keyid = `id=${key}`
+  let keyid = `keyid=${key}`
   var result = document.getElementById("result");
   let query = set_query();
   fetch(default_apikey + keyid + query)
   .then(response => response.json())
   .then(data => {
     console.log(data.total_hit_count);
-    result.innerHTML = data.stringify();
+    result.innerHTML = JSON.stringify(data)
   })
 }
 submit_button.addEventListener('click', () => { grnv(); }, false);
