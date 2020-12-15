@@ -2,14 +2,18 @@
 <input type="text" name="address" id="address"></br>
 <label for="name">名前：</label>
 <input type="text" name="name" id="name"></br>
+<label for="key">apikey：</label>
+<input type="text" name="key" id="key"></br>
 <button id="submit">送信</button>
-<div>結果表示欄</div>
+<div id="result">結果表示欄</div>
 
 <script>
 const default_apikey = 'https://api.gnavi.co.jp/RestSearchAPI/v3/?';
-const keyid = "keyid=cef47ca1112a065456f7be4443382b59";
+//const keyid = "keyid=cef47ca1112a065456f7be4443382b59";
+var result = document.getElementById("result")
 const submit_button = document.getElementById("submit");
 const set_query = () => {
+  let keyid = `keyid=${document.getElementById("key")}`;
   let address = document.getElementById("address").value;
   let name = document.getElementById("name").value;
   let array = new Array();
@@ -26,6 +30,7 @@ const grnv = () => {
   fetch(default_apikey + keyid + query)
   .then(response => response.json())
   .then(data => console.log(data));
+  result.innerHTML = data;
 }
 submit_button.addEventListener('click', () => { grnv(); }, false);  
 </script>
