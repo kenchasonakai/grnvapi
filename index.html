@@ -23,7 +23,8 @@ const set_query = () => {
   return array.join("")
 }
 const grnv = () => {
-  const keyid = document.getElementByid("key");
+  const key = document.getElementByid("key").value;
+  let keyid = `id=${key}`
   var result = document.getElementById("result");
   let query = set_query();
   fetch(default_apikey + keyid + query)
