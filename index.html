@@ -9,7 +9,6 @@
 
 <script>
 const default_apikey = 'https://api.gnavi.co.jp/RestSearchAPI/v3/?';
-var result = document.getElementById("result")
 const submit_button = document.getElementById("submit");
 const set_query = () => {
   let address = document.getElementById("address").value;
@@ -24,12 +23,15 @@ const set_query = () => {
   return array.join("")
 }
 const grnv = () => {
-  let keyid = `keyid=${document.getElementById("key")}`;
+  const keyid = document.getElementByid("key");
+  var result = document.getElementById("result");
   let query = set_query();
   fetch(default_apikey + keyid + query)
   .then(response => response.json())
-  .then(data => console.log(data));
-  result.innerHTML = data;
+  .then(data => {
+    console.log(data.total_hit_count);
+    result.innerHTML = data.stringify();
+  })
 }
-submit_button.addEventListener('click', () => { grnv(); }, false);  
+submit_button.addEventListener('click', () => { grnv(); }, false);
 </script>
